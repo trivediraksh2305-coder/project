@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Professional Portfolio Setup</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .container {
+      background: #fff;
+      width: 100%;
+      max-width: 650px;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+      position: relative;
+    }
+    .container::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+    }
+    h2 { font-size: 28px; font-weight: 600; color: #2d3748; margin-bottom: 24px; text-align: center; }
+    .step { display: none; animation: fadeIn 0.5s ease-in-out; }
+    .step.active { display: block; }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:translateY(0);} }
+
+    .form-group { margin-bottom: 20px; }
+    label { display: block; font-size: 14px; font-weight: 500; color: #4a5568; margin-bottom: 8px; }
+    input[type="text"], input[type="email"], input[type="number"], input[type="url"], textarea {
+      width: 100%; padding: 14px 16px; border: 2px solid #e2e8f0;
+      border-radius: 12px; font-size: 16px; background: #f7fafc;
+      transition: all 0.3s ease;
+    }
+    input:focus, textarea:focus {
+      outline: none; border-color: #667eea; background: #fff;
+      box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
+    }
+    textarea { min-height: 120px; resize: vertical; }
+
+    .progressbar {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 40px; position: relative; padding: 0 20px;
+    }
+    .progressbar::before {
+      content: ''; position: absolute; top: 50%; left: 0; right: 0;
+      height: 4px; background: #e2e8f0; z-index: 1; border-radius: 2px;
+    }
+    .progressbar li {
+      list-style: none; text-align: center; position: relative;
+      z-index: 2; flex: 1; font-size: 12px; font-weight: 500; color: #a0aec0;
+    }
+    .progressbar li::before {
+      content: ''; width: 40px; height: 40px; border: 3px solid #e2e8f0;
+      background: #fff; border-radius: 50%; display: block; margin: 0 auto 10px;
+      transition: all 0.3s ease;
+    }
+    .progressbar li::after { content: attr(data-step); display: block; font-weight: 600; margin-top: 5px; }
+    .progressbar li.active { color: #667eea; }
+    .progressbar li.active::before { background: #667eea; border-color: #667eea; box-shadow: 0 0 0 4px rgba(102,126,234,0.2); }
+    .progressbar li.completed::before { background: #48bb78; border-color: #48bb78; }
+    .progressbar li.completed { color: #48bb78; }
+
+    .buttons { display: flex; justify-content: space-between; margin-top: 32px; gap: 12px; }
+    button {
+      flex: 1; padding: 14px 24px; border: none; border-radius: 12px;
+      font-size: 16px; font-weight: 500; cursor: pointer; transition: all 0.3s ease;
+    }
+    #prevBtn { background: #e2e8f0; color: #4a5568; }
+    #prevBtn:hover:not(:disabled) { background: #cbd5e0; }
+    #nextBtn { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+    #nextBtn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(102,126,234,0.3); }
+    button[disabled] { background: #e2e8f0 !important; color: #a0aec0 !important; cursor: not-allowed; }
+
+    @media (max-width:768px){
+      .container{padding:24px;margin:10px;}
+      h2{font-size:24px;}
+      .progressbar{padding:0 10px;}
+      .progressbar li::before{width:32px;height:32px;}
+      .buttons{flex-direction:column;}
+      button{width:100%;}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <ul class="progressbar">
+      <li class="active" data-step="1">Personal</li>
+      <li data-step="2">Skills</li>
+      <li data-step="3">Experience</li>
+      <li data-step="4">Finish</li>
+    </ul>
+
+    <!-- Step 1 -->
+    <div class="step active">
+      <h2>Personal Details</h2>
+      <div class="form-group" style="text-align:center;">
+        <label for="profileImage">Profile Photo</label><br>
+        <img id="previewImage" src="https://via.placeholder.com/120" 
+             alt="Profile Preview" style="width:120px;height:120px;border-radius:50%;object-fit:cover;margin-bottom:10px;">
+        <input type="file" id="profileImage" accept="image/*">
+      </div>
+      <div class="form-group">
+        <label for="fullName">Full Name</label>
+        <input type="text" id="fullName" placeholder="Enter your full name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="Enter your email" required>
+      </div>
+      <div class="form-group">
+        <label for="rate">Hourly Rate (₹)</label>
+        <input type="number" id="rate" placeholder="e.g. 25" min="1">
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step">
+      <h2>Skills & Keywords</h2>
+      <div class="form-group">
+        <label for="skills">Skills</label>
+        <input type="text" id="skills" placeholder="e.g. Web Development, UI/UX, JavaScript" required>
+      </div>
+      <div class="form-group">
+        <label for="portfolio">Portfolio Link</label>
+        <input type="url" id="portfolio" placeholder="e.g. https://myportfolio.com">
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="step">
+      <h2>Professional Experience</h2>
+      <div class="form-group">
+        <label for="experience">Work Experience</label>
+        <textarea id="experience" placeholder="Describe your experience and key projects..." required></textarea>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="step">
+      <h2>Review & Finish</h2>
+      <p style="text-align:center;color:#4a5568;">Awesome! Review your details and click <b>Submit</b> to create your portfolio.</p>
+    </div>
+
+    <!-- Buttons -->
+    <div class="buttons">
+      <button id="prevBtn" disabled>Previous</button>
+      <button id="nextBtn">Next</button>
+    </div>
+  </div>
+
+<script>
+  const steps = document.querySelectorAll(".step");
+  const progressItems = document.querySelectorAll(".progressbar li");
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+  const profileInput = document.getElementById("profileImage");
+  const previewImg = document.getElementById("previewImage");
+  let currentStep = 0;
+  let profileImageBase64 = "";
+
+  // Image preview & convert to Base64
+  profileInput.addEventListener("change", () => {
+    const file = profileInput.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        profileImageBase64 = reader.result; // save as base64 string
+        previewImg.src = profileImageBase64; // show preview
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  function updateProgress() {
+    progressItems.forEach((item, index) => {
+      item.classList.remove("active", "completed");
+      if (index < currentStep) item.classList.add("completed");
+      else if (index === currentStep) item.classList.add("active");
+    });
+  }
+
+  function showStep(step) {
+    steps.forEach((s, i) => s.classList.toggle("active", i === step));
+    updateProgress();
+    prevBtn.disabled = step === 0;
+    nextBtn.textContent = step === steps.length - 1 ? "Submit" : "Next";
+  }
+
+  nextBtn.addEventListener("click", () => {
+    if (currentStep < steps.length - 1) {
+      // Validate required inputs
+      const currentInputs = steps[currentStep].querySelectorAll("input[required], textarea[required]");
+      let valid = true;
+      currentInputs.forEach(inp => {
+        if (!inp.value.trim()) {
+          inp.style.borderColor = "#e53e3e";
+          valid = false;
+        } else {
+          inp.style.borderColor = "#e2e8f0";
+        }
+      });
+      if (!valid) return;
+
+      currentStep++;
+      showStep(currentStep);
+    } else {
+      // Collect portfolio details
+      const portfolioData = {
+        image: profileImageBase64,
+        fullName: document.getElementById("fullName").value,
+        email: document.getElementById("email").value,
+        hourlyRate: document.getElementById("rate").value,
+        skills: document.getElementById("skills").value,
+        portfolioLink: document.getElementById("portfolio").value,
+        workExperience: document.getElementById("experience").value,
+      };
+
+      // Save in localStorage
+      localStorage.setItem("portfolioData", JSON.stringify(portfolioData));
+
+      alert("Portfolio submitted successfully! Redirecting to dashboard...");
+      window.location.href = "dashboard.html";
+    }
+  });
+
+  prevBtn.addEventListener("click", () => {
+    if (currentStep > 0) {
+      currentStep--;
+      showStep(currentStep);
+    }
+  });
+
+  // Show first step
+  showStep(0);
+</script>
+</body>
+</html>
+

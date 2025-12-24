@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Services - HomeServe</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Reset & Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --secondary: #7e22ce;
+      --accent: #f97316;
+      --text: #1f2937;
+      --text-light: #6b7280;
+      --background: #f9fafb;
+      --card-bg: #ffffff;
+      --border: #e5e7eb;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      line-height: 1.6;
+      background-color: var(--background);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      background: var(--card-bg);
+      padding: 15px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo i {
+      font-size: 26px;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 16px;
+      font-weight: 500;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    nav ul li a:hover {
+      color: var(--primary);
+    }
+
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary);
+      transition: width 0.3s;
+    }
+
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+
+    .login-btn {
+      background: var(--primary);
+      color: #fff;
+      padding: 10px 22px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 500;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .login-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: var(--text);
+    }
+
+    /* Page Header */
+    .page-header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+      opacity: 0.5;
+    }
+
+    .page-header-content {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .page-header h1 {
+      font-size: 42px;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .breadcrumb {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      gap: 10px;
+      font-size: 16px;
+    }
+
+    .breadcrumb li {
+      display: flex;
+      align-items: center;
+    }
+
+    .breadcrumb li:not(:last-child)::after {
+      content: '/';
+      margin-left: 10px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .breadcrumb a {
+      color: white;
+      text-decoration: none;
+      transition: opacity 0.3s;
+    }
+
+    .breadcrumb a:hover {
+      opacity: 0.8;
+    }
+
+    /* Services Section */
+    .services-section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 32px;
+      margin-bottom: 50px;
+      font-weight: 700;
+      color: var(--text);
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+
+    .services-tabs {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 50px;
+    }
+
+    .tab-button {
+      padding: 12px 24px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+
+    .tab-button:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .tab-button.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 30px;
+    }
+
+    .service-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .service-image {
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .service-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+
+    .service-card:hover .service-image img {
+      transform: scale(1.05);
+    }
+
+    .service-content {
+      padding: 25px;
+    }
+
+    .service-title {
+      font-size: 20px;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .service-description {
+      color: var(--text-light);
+      margin-bottom: 20px;
+      line-height: 1.7;
+    }
+
+    .service-features {
+      margin-bottom: 25px;
+    }
+
+    .service-features li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      color: var(--text-light);
+    }
+
+    .service-features li i {
+      color: var(--primary);
+      margin-right: 10px;
+    }
+
+    .service-price {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+
+    .service-cta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .book-btn {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+
+    .book-btn:hover {
+      background: var(--primary-dark);
+    }
+
+    .detail-btn {
+      display: inline-block;
+      color: var(--primary);
+      padding: 10px 15px;
+      border: 1px solid var(--primary);
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .detail-btn:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    /* Service Details Page (Hidden by default) */
+    .service-details-page {
+      display: none;
+      padding: 40px 0 80px;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+      margin-bottom: 30px;
+      padding: 10px 20px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      transition: all 0.3s;
+    }
+
+    .back-btn:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .service-detail-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 992px) {
+      .service-detail-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .service-detail-image {
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .service-detail-image img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+    }
+
+    .service-detail-content h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+      color: var(--text);
+    }
+
+    .service-detail-price {
+      font-size: 28px;
+      color: var(--primary);
+      font-weight: 700;
+      margin-bottom: 30px;
+    }
+
+    .service-detail-description {
+      color: var(--text-light);
+      line-height: 1.8;
+      margin-bottom: 30px;
+      font-size: 18px;
+    }
+
+    .service-included, .service-process {
+      margin-bottom: 30px;
+    }
+
+    .service-included h3, .service-process h3 {
+      font-size: 22px;
+      margin-bottom: 20px;
+      color: var(--text);
+    }
+
+    .service-included ul, .service-process ol {
+      padding-left: 20px;
+      color: var(--text-light);
+      line-height: 1.8;
+    }
+
+    .service-included li, .service-process li {
+      margin-bottom: 10px;
+    }
+
+    .detail-actions {
+      display: flex;
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .detail-book-btn {
+      background: var(--primary);
+      color: white;
+      padding: 15px 30px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: background 0.3s;
+    }
+
+    .detail-book-btn:hover {
+      background: var(--primary-dark);
+    }
+
+    /* How It Works Section */
+    .how-it-works {
+      background: var(--card-bg);
+      padding: 80px 0;
+    }
+
+    .steps-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      counter-reset: step-counter;
+    }
+
+    .step-card {
+      text-align: center;
+      padding: 30px 20px;
+      position: relative;
+    }
+
+    .step-card::before {
+      counter-increment: step-counter;
+      content: counter(step-counter);
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 40px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+    }
+
+    .step-icon {
+      font-size: 40px;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+
+    .step-title {
+      font-size: 20px;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .step-description {
+      color: var(--text-light);
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+      border-radius: 12px;
+      margin: 80px 0;
+    }
+
+    .cta-content {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .cta-title {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    .cta-text {
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: white;
+      color: var(--primary);
+      padding: 15px 30px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      padding: 80px 0;
+    }
+
+    .faq-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      margin-bottom: 20px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .faq-question {
+      padding: 20px;
+      background: var(--card-bg);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+    }
+
+    .faq-answer {
+      padding: 0 20px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s, padding 0.3s;
+      background: var(--background);
+    }
+
+    .faq-item.active .faq-answer {
+      padding: 20px;
+      max-height: 200px;
+    }
+
+    .faq-item.active .faq-toggle i {
+      transform: rotate(180deg);
+    }
+
+    .faq-toggle {
+      transition: transform 0.3s;
+    }
+
+    /* Footer */
+    footer {
+      background: #0f172a;
+      color: #fff;
+      padding: 70px 0 30px;
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+    }
+
+    .footer-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+    }
+
+    .footer-col h3 {
+      font-size: 20px;
+      margin-bottom: 25px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .footer-col h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background: var(--primary);
+    }
+
+    .footer-col p {
+      margin-bottom: 20px;
+      color: #cbd5e1;
+      line-height: 1.8;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin: 15px 0;
+    }
+
+    .footer-col ul li a {
+      text-decoration: none;
+      color: #cbd5e1;
+      transition: 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-col ul li a:hover {
+      color: white;
+      padding-left: 5px;
+    }
+
+    .footer-col .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .footer-col .social-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      color: white;
+      transition: 0.3s;
+    }
+
+    .footer-col .social-links a:hover {
+      background: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 30px;
+      margin-top: 50px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94a3b8;
+      font-size: 14px;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .services-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header-container {
+        padding: 0 15px;
+      }
+      
+      .mobile-menu-btn {
+        display: block;
+      }
+      
+      nav {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: var(--card-bg);
+        transition: 0.3s;
+        z-index: 999;
+      }
+      
+      nav.active {
+        left: 0;
+      }
+      
+      nav ul {
+        flex-direction: column;
+        padding: 30px;
+        gap: 20px;
+      }
+      
+      .page-header h1 {
+        font-size: 32px;
+      }
+      
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .detail-actions {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .page-header h1 {
+        font-size: 28px;
+      }
+      
+      .section-title {
+        font-size: 26px;
+      }
+      
+      .services-tabs {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .tab-button {
+        width: 100%;
+        text-align: center;
+      }
+      
+      .service-cta {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+      }
+      
+      .footer-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .service-detail-content h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <i class="fas fa-home"></i>
+        <span>HomeServe</span>
+      </div>
+      
+      <button class="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html" class="active">Services</a></li>
+          <li><a href="mybooking.html">My Bookings</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <a href="login.html"><button class="login-btn">Login</button></a>
+    </div>
+  </header>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="page-header-content">
+      <h1>Our Services</h1>
+      <ul class="breadcrumb">
+        <li><a href="index.html">Home</a></li>
+        <li>Services</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Services Section (Main Page) -->
+  <section class="services-section" id="services-main">
+    <div class="container">
+      <h2 class="section-title">Professional Home Services</h2>
+      
+      <div class="services-tabs">
+        <button class="tab-button active" data-category="all">All Services</button>
+        <button class="tab-button" data-category="cleaning">Cleaning</button>
+        <button class="tab-button" data-category="repair">Repairs</button>
+        <button class="tab-button" data-category="improvement">Home Improvement</button>
+        <button class="tab-button" data-category="maintenance">Maintenance</button>
+      </div>
+      
+      <div class="services-grid">
+        <!-- Cleaning Service -->
+        <div class="service-card" data-category="cleaning" data-service="deep-cleaning">
+          <div class="service-image">
+            <img src="images/cleaning.jpg" alt="Deep Cleaning Service">
+          </div>
+          <div class="service-content">
+            <h3 class="service-title">Deep Cleaning</h3>
+            <p class="service-description">Thorough home cleaning with eco-friendly products and professional equipment for a spotless living space.</p>
+            <ul class="service-features">
+              <li><i class="fas fa-check"></i> Kitchen and bathroom sanitization</li>
+              <li><i class="fas fa-check"></i> Dusting and vacuuming all surfaces</li>
+              <li><i class="fas fa-check"></i> Window and mirror cleaning</li>
+              <li><i class="fas fa-check"></i> Floor mopping and polishing</li>
+            </ul>
+            <div class="service-price">Starting at  ₹129</div>
+            <div class="service-cta">
+              <a href="booking.html" class="book-btn">Book Now</a>
+              <button class="detail-btn" onclick="showServiceDetails('deep-cleaning')">Details</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Plumbing Service -->
+        <div class="service-card" data-category="repair" data-service="plumbing">
+          <div class="service-image">
+            <img src="images/plumbing.jpg" alt="Plumbing Service">
+          </div>
+          <div class="service-content">
+            <h3 class="service-title">Plumbing Solutions</h3>
+            <p class="service-description">Expert plumbing services for leaks, clogs, installations, and repairs by certified professionals.</p>
+            <ul class="service-features">
+              <li><i class="fas fa-check"></i> Leak detection and repair</li>
+              <li><i class="fas fa-check"></i> Drain and pipe cleaning</li>
+              <li><i class="fas fa-check"></i> Fixture installation and repair</li>
+              <li><i class="fas fa-check"></i> Water heater services</li>
+            </ul>
+            <div class="service-price">Starting at  ₹89</div>
+            <div class="service-cta">
+              <a href="booking.html" class="book-btn">Book Now</a>
+              <button class="detail-btn" onclick="showServiceDetails('plumbing')">Details</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Electrical Service -->
+        <div class="service-card" data-category="repair" data-service="electrical">
+          <div class="service-image">
+            <img src="images/electrician.jpg" alt="Electrical Service">
+          </div>
+          <div class="service-content">
+            <h3 class="service-title">Electrical Services</h3>
+            <p class="service-description">Safe and reliable electrical repairs, installations, and upgrades by certified electricians.</p>
+            <ul class="service-features">
+              <li><i class="fas fa-check"></i> Wiring and rewiring</li>
+              <li><i class="fas fa-check"></i> Fixture installation</li>
+              <li><i class="fas fa-check"></i> Outlet and switch repair</li>
+              <li><i class="fas fa-check"></i> Electrical safety inspection</li>
+            </ul>
+            <div class="service-price">Starting at  ₹79</div>
+            <div class="service-cta">
+              <a href="booking.html" class="book-btn">Book Now</a>
+              <button class="detail-btn" onclick="showServiceDetails('electrical')">Details</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Painting Service -->
+        <div class="service-card" data-category="improvement" data-service="painting">
+          <div class="service-image">
+            <img src="images/painting.jpg" alt="Painting Service">
+          </div>
+          <div class="service-content">
+            <h3 class="service-title">Painting Services</h3>
+            <p class="service-description">Interior and exterior painting with premium quality paints and skilled artisans.</p>
+            <ul class="service-features">
+              <li><i class="fas fa-check"></i> Interior wall painting</li>
+              <li><i class="fas fa-check"></i> Exterior house painting</li>
+              <li><i class="fas fa-check"></i> Cabinet refinishing</li>
+              <li><i class="fas fa-check"></i> Color consultation</li>
+            </ul>
+            <div class="service-price">Starting at  ₹199</div>
+            <div class="service-cta">
+              <a href="booking.html" class="book-btn">Book Now</a>
+              <button class="detail-btn" onclick="showServiceDetails('painting')">Details</button>
+            </div>
+          </div>
+        </div>
+        
+        
+  </section>
+
+  <!-- Service Details Page (Hidden by default) -->
+  <section class="service-details-page" id="service-details">
+    <div class="container">
+      <a href="#" class="back-btn" onclick="goBackToServices()">
+        <i class="fas fa-arrow-left"></i> Back to Services
+      </a>
+      
+      <div class="service-detail-container" id="service-detail-content">
+        <!-- Content will be dynamically inserted here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="how-it-works">
+    <div class="container">
+      <h2 class="section-title">How It Works</h2>
+      
+      <div class="steps-container"> 
+        <div class="step-card">
+          <div class="step-icon">
+            <i class="fas fa-search"></i>
+          </div>
+          <h3 class="step-title">Choose a Service</h3>
+          <p class="step-description">Browse our services and select the one that meets your needs.</p>
+        </div>
+        
+        <div class="step-card">
+          <div class="step-icon">
+            <i class="fas fa-calendar-check"></i>
+          </div>
+          <h3 class="step-title">Book Online</h3>
+          <p class="step-description">Select a convenient date and time for your service.</p>
+        </div>
+        
+        <div class="step-card">
+          <div class="step-icon">
+            <i class="fas fa-user-check"></i>
+          </div>
+          <h3 class="step-title">Expert Service</h3>
+          <p class="step-description">Our verified professional will arrive on time and deliver quality service.</p>
+        </div>
+        
+        <div class="step-card">
+          <div class="step-icon">
+            <i class="fas fa-smile"></i>
+          </div>
+          <h3 class="step-title">Enjoy Results</h3>
+          <p class="step-description">Relax and enjoy your beautifully serviced home with our satisfaction guarantee.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="container">
+    <div class="cta-section">
+      <div class="cta-content">
+        <h2 class="cta-title">Need Help Choosing a Service?</h2>
+        <p class="cta-text">Our customer service team is available to help you select the right service for your needs.</p>
+        <a href="contact.html" class="cta-button">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq-section">
+    <div class="container">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      
+      <div class="faq-container">
+        <div class="faq-item">
+          <div class="faq-question">
+            How do I book a service? 
+            <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+          </div>
+          <div class="faq-answer">
+            You can book a service through our website by selecting the service you need, choosing your preferred date and time, and completing the booking form. Alternatively, you can call our customer service team for assistance.
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            Are your service providers verified? 
+            <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+          </div>
+          <div class="faq-answer">
+            Yes, all our service providers undergo a rigorous verification process including background checks, skill assessments, and reference verification to ensure your safety and satisfaction.
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            What if I need to reschedule or cancel? 
+            <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+          </div>
+          <div class="faq-answer">
+            You can reschedule or cancel your booking up to 24 hours before the scheduled service time at no charge. Cancellations within 24 hours may incur a fee.
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            Do you offer warranties on your services? 
+            <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+          </div>
+          <div class="faq-answer">
+            Yes, we offer a 30-day satisfaction guarantee on all our services. If you're not happy with the results, we'll send a professional to fix the issue at no additional cost.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-col">
+        <h3>About HomeServe</h3>
+        <p>Your trusted home service partner for all needs. We connect you with verified professionals for quality service.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+          <li><a href="services.html"><i class="fas fa-chevron-right"></i> Services</a></li>
+          <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+          <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Our Services</h3>
+        <ul>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Cleaning</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Plumbing</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Painting</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Electrical</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> AC Repair</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Contact Us</h3>
+        <ul>
+          <li><a href="#"><i class="fas fa-map-marker-alt"></i> 123 Service Road, City</a></li>
+          <li><a href="tel:+919876543210"><i class="fas fa-phone"></i> +91 98765 43210</a></li>
+          <li><a href="mailto:support@homeserve.com"><i class="fas fa-envelope"></i> support@homeserve.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>&copy; 2023 HomeServe. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Service details data
+    const serviceDetails = {
+      'deep-cleaning': {
+        title: 'Deep Cleaning Service',
+        image: 'images/cleaning.jpg',
+        price: 'Starting at ₹129',
+        description: 'Our professional deep cleaning service provides a thorough and comprehensive cleaning of your entire home. We use eco-friendly cleaning products and industrial-grade equipment to ensure every corner of your living space is spotless and sanitized.',
+        included: [
+          'Kitchen: Countertops, cabinets, appliances (inside & out), sink, backsplash',
+          'Bathrooms: Toilets, showers, tubs, sinks, mirrors, tiles, fixtures',
+          'Living Areas: Dusting all surfaces, vacuuming carpets, mopping floors',
+          'Bedrooms: Bed making, dusting, vacuuming, closet organization',
+          'Additional: Window cleaning, baseboard cleaning, light fixture dusting'
+        ],
+        process: [
+          'Initial consultation and assessment of your cleaning needs',
+          'Preparation with protective coverings for furniture and floors',
+          'Systematic cleaning from top to bottom in all rooms',
+          'Use of eco-friendly, non-toxic cleaning products',
+          'Final inspection to ensure quality standards are met'
+        ],
+        duration: '4-6 hours depending on home size'
+      },
+      'plumbing': {
+        title: 'Plumbing Solutions',
+        image: 'images/plumbing.jpg',
+        price: 'Starting at ₹89',
+        description: 'Our certified plumbers provide comprehensive plumbing services for residential properties. From minor repairs to major installations, we ensure your plumbing system functions efficiently and reliably.',
+        included: [
+          'Leak detection and repair for pipes, faucets, and fixtures',
+          'Drain cleaning and unclogging for sinks, showers, and toilets',
+          'Fixture installation (sinks, faucets, toilets, showers)',
+          'Water heater installation, repair, and maintenance',
+          'Pipe repair, replacement, and installation'
+        ],
+        process: [
+          'Diagnosis of the plumbing issue',
+          'Providing a detailed estimate and timeline',
+          'Using professional tools and equipment for repair',
+          'Testing the repaired system thoroughly',
+          'Cleanup and disposal of any waste materials'
+        ],
+        duration: '1-4 hours depending on complexity'
+      },
+      'electrical': {
+        title: 'Electrical Services',
+        image: 'images/electrician.jpg',
+        price: 'Starting at ₹79',
+        description: 'Our licensed electricians provide safe and reliable electrical services for your home. From minor repairs to complete rewiring, we ensure all electrical work meets safety standards and building codes.',
+        included: [
+          'Electrical wiring and rewiring for rooms or entire homes',
+          'Fixture installation (lighting, ceiling fans, switches, outlets)',
+          'Circuit breaker panel upgrades and repairs',
+          'Electrical safety inspections and code compliance',
+          'Troubleshooting and repair of electrical issues'
+        ],
+        process: [
+          'Safety assessment and circuit testing',
+          'Detailed plan for electrical work needed',
+          'Use of proper safety equipment and procedures',
+          'Installation or repair following electrical codes',
+          'Final testing and safety verification'
+        ],
+        duration: '2-8 hours depending on project scope'
+      },
+      'painting': {
+        title: 'Painting Services',
+        image: 'images/painting.jpg',
+        price: 'Starting at ₹199',
+        description: 'Transform your living spaces with our professional painting services. We use premium quality paints and skilled techniques to deliver flawless results for both interior and exterior surfaces.',
+        included: [
+          'Interior wall and ceiling painting',
+          'Exterior house painting and staining',
+          'Cabinet refinishing and repainting',
+          'Trim, door, and window painting',
+          'Color consultation and selection assistance'
+        ],
+        process: [
+          'Surface preparation (cleaning, sanding, patching)',
+          'Primer application for better paint adhesion',
+          'Multiple coats of premium quality paint',
+          'Clean lines and professional finish',
+          'Cleanup and protection of surrounding areas'
+        ],
+        duration: '1-5 days depending on project size'
+      },
+      'ac-repair': {
+        title: 'AC Repair & Service',
+        image: 'images/ac.jpg',
+        price: 'Starting at  ₹99',
+        description: 'Keep your home comfortable year-round with our professional AC services. Our certified technicians provide installation, maintenance, and repair services for all types of air conditioning systems.',
+        included: [
+          'AC system installation for new setups',
+          'Routine maintenance and tune-ups',
+          'Repair services for malfunctioning units',
+          'Duct cleaning and air quality improvement',
+          'System diagnostics and efficiency optimization'
+        ],
+        process: [
+          'System inspection and diagnosis',
+          'Detailed explanation of required services',
+          'Professional repair or maintenance work',
+          'System testing and performance verification',
+          'Advice on optimal usage and maintenance'
+        ],
+        duration: '1-3 hours for repairs, 4-8 hours for installation'
+      },
+      'gardening': {
+        title: 'Gardening & Landscaping',
+        image: 'https://images.unsplash.com/photo-1590065480004-477ef6d4d7d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80',
+        price: 'Starting at  ₹69',
+        description: 'Create and maintain beautiful outdoor spaces with our gardening and landscaping services. Our experts provide comprehensive care for lawns, plants, and landscapes.',
+        included: [
+          'Lawn mowing, edging, and maintenance',
+          'Planting, pruning, and garden care',
+          'Landscape design and installation',
+          'Irrigation system installation and repair',
+          'Weed control and fertilization'
+        ],
+        process: [
+          'Assessment of your outdoor space and needs',
+          'Development of a customized care plan',
+          'Professional gardening and landscaping work',
+          'Use of appropriate tools and equipment',
+          'Regular maintenance scheduling available'
+        ],
+        duration: '2-6 hours depending on property size'
+      }
+    };
+
+    // Mobile menu toggle
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const nav = document.querySelector('nav');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+      nav.classList.toggle('active');
+    });
+
+    // Service filtering
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const serviceCards = document.querySelectorAll('.service-card');
+    
+    tabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Remove active class from all buttons
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        
+        // Add active class to clicked button
+        button.classList.add('active');
+        
+        // Get category to filter
+        const category = button.getAttribute('data-category');
+        
+        // Show/hide service cards based on category
+        serviceCards.forEach(card => {
+          if (category === 'all' || card.getAttribute('data-category') === category) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // FAQ accordion
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    faqItems.forEach(item => {
+      const question = item.querySelector('.faq-question');
+      
+      question.addEventListener('click', () => {
+        // Toggle active class on clicked item
+        item.classList.toggle('active');
+        
+        // Close other items
+        faqItems.forEach(otherItem => {
+          if (otherItem !== item) {
+            otherItem.classList.remove('active');
+          }
+        });
+      });
+    });
+
+    // Show service details function
+    function showServiceDetails(serviceId) {
+      const service = serviceDetails[serviceId];
+      if (!service) return;
+      
+      // Hide main services page
+      document.getElementById('services-main').style.display = 'none';
+      
+      // Show service details page
+      document.getElementById('service-details').style.display = 'block';
+      
+      // Update page header
+      document.querySelector('.page-header h1').textContent = service.title;
+      document.querySelector('.breadcrumb').innerHTML = `
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#" onclick="goBackToServices()">Services</a></li>
+        <li>${service.title}</li>
+      `;
+      
+      // Populate service details
+      document.getElementById('service-detail-content').innerHTML = `
+        <div class="service-detail-image">
+          <img src="${service.image}" alt="${service.title}">
+        </div>
+        <div class="service-detail-content">
+          <h1>${service.title}</h1>
+          <div class="service-detail-price">${service.price}</div>
+          <p class="service-detail-description">${service.description}</p>
+          
+          <div class="service-included">
+            <h3>What's Included</h3>
+            <ul>
+              ${service.included.map(item => `<li>${item}</li>`).join('')}
+            </ul>
+          </div>
+          
+          <div class="service-process">
+            <h3>Our Process</h3>
+            <ol>
+              ${service.process.map(item => `<li>${item}</li>`).join('')}
+            </ol>
+          </div>
+          
+          <div class="service-duration">
+            <h3>Service Duration</h3>
+            <p>${service.duration}</p>
+          </div>
+          
+          <div class="detail-actions">
+            <a href="booking.html?service=${encodeURIComponent(service.title)}" class="detail-book-btn">
+              <i class="fas fa-calendar-check"></i> Book This Service
+            </a>
+          </div>
+        </div>
+      `;
+      
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Go back to services function
+    function goBackToServices() {
+      // Show main services page
+      document.getElementById('services-main').style.display = 'block';
+      
+      // Hide service details page
+      document.getElementById('service-details').style.display = 'none';
+      
+      // Reset page header
+      document.querySelector('.page-header h1').textContent = 'Our Services';
+      document.querySelector('.breadcrumb').innerHTML = `
+        <li><a href="index.html">Home</a></li>
+        <li>Services</li>
+      `;
+      
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      
+      return false; // Prevent default link behavior
+    }
+
+    // Check URL for service parameter on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const serviceParam = urlParams.get('service');
+      
+      if (serviceParam) {
+        // Map URL parameter to service ID
+        const serviceMap = {
+          'Deep Cleaning': 'deep-cleaning',
+          'Plumbing Solutions': 'plumbing',
+          'Electrical Services': 'electrical',
+          'Painting Services': 'painting',
+          'AC Repair & Service': 'ac-repair',
+          'Gardening & Landscaping': 'gardening'
+        };
+        
+        const serviceId = serviceMap[serviceParam];
+        if (serviceId) {
+          setTimeout(() => showServiceDetails(serviceId), 100);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

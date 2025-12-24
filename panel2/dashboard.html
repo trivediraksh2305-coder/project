@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Provider Dashboard | ServicePro</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1e40af;
+      --secondary: #64748b;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --light: #f8fafc;
+      --dark: #1e293b;
+      --sidebar-width: 260px;
+      --border-radius: 12px;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      display: flex;
+      background: #f1f5f9;
+      color: #334155;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: var(--sidebar-width);
+      background: linear-gradient(180deg, var(--dark), #0f172a);
+      color: white;
+      position: fixed;
+      height: 100vh;
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+      z-index: 1000;
+    }
+
+    .sidebar-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 32px;
+      padding: 0 12px;
+    }
+
+    .sidebar-header h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: white;
+    }
+
+    .sidebar-header i {
+      margin-right: 12px;
+      font-size: 28px;
+      color: var(--primary);
+    }
+
+    .sidebar-menu {
+      list-style: none;
+      flex-grow: 1;
+    }
+
+    .sidebar-menu li {
+      margin-bottom: 8px;
+    }
+
+    .sidebar-menu a {
+      color: #cbd5e1;
+      text-decoration: none;
+      padding: 12px 16px;
+      border-radius: var(--border-radius);
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      font-weight: 500;
+    }
+
+    .sidebar-menu a:hover, .sidebar-menu a.active {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+    }
+
+    .sidebar-menu i {
+      margin-right: 12px;
+      font-size: 18px;
+      width: 24px;
+      text-align: center;
+    }
+
+    .sidebar-footer {
+      padding: 16px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: auto;
+    }
+
+    .sidebar-footer a {
+      color: #cbd5e1;
+      text-decoration: none;
+      padding: 12px 16px;
+      border-radius: var(--border-radius);
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      font-weight: 500;
+    }
+
+    .sidebar-footer a:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+    }
+
+    /* Main Content */
+    .main {
+      flex: 1;
+      margin-left: var(--sidebar-width);
+      padding: 24px;
+      transition: var(--transition);
+    }
+
+    /* Topbar */
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      background: white;
+      padding: 16px 24px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+    }
+
+    .page-title h1 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    .page-title p {
+      color: var(--secondary);
+      font-size: 14px;
+      margin-top: 4px;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      position: relative;
+    }
+
+    .notifications {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .notifications i {
+      font-size: 20px;
+      color: var(--secondary);
+    }
+
+    .notification-badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: var(--danger);
+      color: white;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: var(--border-radius);
+      transition: var(--transition);
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .user-profile:hover {
+      background: #f1f5f9;
+    }
+
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 600;
+    }
+
+    .user-details {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .user-details .name {
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    .user-details .role {
+      font-size: 12px;
+      color: var(--secondary);
+    }
+
+    /* Notification Dropdown */
+    .notifications-dropdown {
+      position: absolute;
+      top: 50px;
+      right: 0;
+      width: 320px;
+      background: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      z-index: 1000;
+      display: none;
+      overflow: hidden;
+    }
+
+    .notifications-dropdown.active {
+      display: block;
+    }
+
+    .notifications-header {
+      padding: 16px;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .notifications-header h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    .notifications-header a {
+      color: var(--primary);
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    .notifications-list {
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .notification-item {
+      padding: 16px;
+      border-bottom: 1px solid #f1f5f9;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .notification-item:hover {
+      background: #f8fafc;
+    }
+
+    .notification-item.unread {
+      background: rgba(37, 99, 235, 0.05);
+    }
+
+    .notification-title {
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+
+    .notification-message {
+      font-size: 14px;
+      color: var(--secondary);
+      margin-bottom: 8px;
+    }
+
+    .notification-time {
+      font-size: 12px;
+      color: #94a3b8;
+    }
+
+    .notification-empty {
+      padding: 32px 16px;
+      text-align: center;
+      color: var(--secondary);
+    }
+
+    /* Cards */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .card {
+      background: white;
+      border-radius: var(--border-radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    .card-icon {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      opacity: 0.1;
+    }
+
+    .card.upcoming .card-icon {
+      background: var(--primary);
+      color: var(--primary);
+    }
+
+    .card.completed .card-icon {
+      background: var(--success);
+      color: var(--success);
+    }
+
+    .card.pending .card-icon {
+      background: var(--warning);
+      color: var(--warning);
+    }
+
+    .card.earnings .card-icon {
+      background: var(--danger);
+      color: var(--danger);
+    }
+
+    .card h3 {
+      font-size: 14px;
+      margin-bottom: 12px;
+      color: var(--secondary);
+      font-weight: 500;
+    }
+
+    .card p {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+
+    .card .change {
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+    }
+
+    .card .change.positive {
+      color: var(--success);
+    }
+
+    .card .change.negative {
+      color: var(--danger);
+    }
+
+    /* Charts */
+    .charts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .chart-container {
+      background: white;
+      padding: 24px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      position: relative;
+      height: 350px;
+    }
+
+    .chart-container h3 {
+      font-size: 18px;
+      margin-bottom: 16px;
+      color: var(--dark);
+      font-weight: 600;
+    }
+
+    /* Table */
+    .table-container {
+      background: white;
+      padding: 24px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+    }
+
+    .table-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .table-header h3 {
+      font-size: 18px;
+      color: var(--dark);
+      font-weight: 600;
+    }
+
+    .view-all {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+    }
+
+    .view-all i {
+      margin-left: 4px;
+      transition: var(--transition);
+    }
+
+    .view-all:hover i {
+      transform: translateX(3px);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+    }
+
+    thead {
+      background: #f1f5f9;
+    }
+
+    th {
+      padding: 16px;
+      text-align: left;
+      font-weight: 600;
+      color: var(--secondary);
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    td {
+      padding: 16px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    tbody tr {
+      transition: var(--transition);
+    }
+
+    tbody tr:hover {
+      background: #f8fafc;
+    }
+
+    .status {
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      display: inline-block;
+    }
+
+    .status.confirmed {
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--success);
+    }
+
+    .status.pending {
+      background: rgba(245, 158, 11, 0.1);
+      color: var(--warning);
+    }
+
+    .status.completed {
+      background: rgba(37, 99, 235, 0.1);
+      color: var(--primary);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .charts-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        transform: translateX(-100%);
+        width: 280px;
+      }
+      
+      .sidebar.active {
+        transform: translateX(0);
+      }
+      
+      .main {
+        margin-left: 0;
+        width: 100%;
+      }
+      
+      .menu-toggle {
+        display: block;
+        margin-right: 16px;
+        font-size: 24px;
+        cursor: pointer;
+        color: var(--dark);
+      }
+      
+      .cards {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      .notifications-dropdown {
+        width: 280px;
+        right: -20px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .cards {
+        grid-template-columns: 1fr;
+      }
+      
+      .user-details {
+        display: none;
+      }
+      
+      .notifications-dropdown {
+        width: 260px;
+        right: -40px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <i class="fas fa-concierge-bell"></i>
+      <h2>ServicePro</h2>
+    </div>
+    
+    <ul class="sidebar-menu">
+      <li><a href="dashboard.html" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+      <li><a href="appointments.html"><i class="fas fa-calendar-check"></i> Appointments</a></li>
+      <li><a href="services.html"><i class="fas fa-tools"></i> Services</a></li>
+      <li><a href="earnings.html"><i class="fas fa-chart-line"></i> Earnings</a></li>
+      <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+    </ul>
+    
+    <div class="sidebar-footer">
+      <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+    <!-- Topbar -->
+    <div class="topbar">
+      <div class="page-title">
+        <h1>Dashboard</h1>
+        <p>Welcome back, John! Here's what's happening today.</p>
+      </div>
+      
+      <div class="user-info">
+        <!-- Notifications with dropdown -->
+        <div class="notifications" id="notificationIcon">
+          <i class="fas fa-bell"></i>
+          <span class="notification-badge">3</span>
+          
+          <!-- Notifications Dropdown -->
+          <div class="notifications-dropdown" id="notificationsDropdown">
+            <div class="notifications-header">
+              <h3>Notifications</h3>
+              <a href="#" id="markAllRead">Mark all as read</a>
+            </div>
+            <div class="notifications-list" id="notificationsList">
+              <!-- Notifications will be populated by JavaScript -->
+            </div>
+          </div>
+        </div>
+        
+        <!-- User Profile - Clickable to settings -->
+        <a href="settings.html" class="user-profile">
+          <div class="avatar">JD</div>
+          <div class="user-details">
+            <span class="name">John Doe</span>
+            <span class="role">Service Provider</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="cards">
+      <div class="card upcoming">
+        <div class="card-icon">
+          <i class="fas fa-calendar"></i>
+        </div>
+        <h3>Upcoming Appointments</h3>
+        <p id="upcomingCount">12</p>
+        <div class="change positive">
+          <i class="fas fa-arrow-up"></i> 2 from yesterday
+        </div>
+      </div>
+      
+      <div class="card completed">
+        <div class="card-icon">
+          <i class="fas fa-check-circle"></i>
+        </div>
+        <h3>Completed Services</h3>
+        <p id="completedCount">48</p>
+        <div class="change positive">
+          <i class="fas fa-arrow-up"></i> 5% from last week
+        </div>
+      </div>
+      
+      <div class="card pending">
+        <div class="card-icon">
+          <i class="fas fa-clock"></i>
+        </div>
+        <h3>Pending Requests</h3>
+        <p id="pendingCount">5</p>
+        <div class="change negative">
+          <i class="fas fa-arrow-down"></i> 1 from yesterday
+        </div>
+      </div>
+      
+      <div class="card earnings">
+        <div class="card-icon">
+          <i class="fas fa-dollar-sign"></i>
+        </div>
+        <h3>Total Earnings</h3>
+        <p id="totalEarnings">₹2,540</p>
+        <div class="change positive">
+          <i class="fas fa-arrow-up"></i> 12% from last month
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="charts-grid">
+      <div class="chart-container">
+        <h3>Appointments Trend</h3>
+        <canvas id="lineChart"></canvas>
+      </div>
+      <div class="chart-container">
+        <h3>Services by Category</h3>
+        <canvas id="barChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Recent Appointments -->
+    <div class="table-container">
+      <div class="table-header">
+        <h3>Recent Appointments</h3>
+        <a href="appointments.html" class="view-all">
+          View All <i class="fas fa-chevron-right"></i>
+        </a>
+      </div>
+      
+      <table>
+        <thead>
+          <tr>
+            <th>Client</th>
+            <th>Service</th>
+            <th>Date & Time</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="recentAppointments">
+          <!-- JS will load rows -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    // Dummy Data
+    const dashboardData = {
+      upcoming: 12,
+      completed: 48,
+      pending: 5,
+      earnings: 2540,
+      appointmentsTrend: [5,8,6,7,9,12,10],
+      categories: {Plumbing:12, Electrical:8, Cleaning:15, Painting:7},
+      recent: [
+        {client:"Sarah Johnson", service:"Plumbing Repair", date:"2023-08-25 10:00 AM", status:"Confirmed"},
+        {client:"Michael Brown", service:"AC Installation", date:"2023-08-26 02:30 PM", status:"Pending"},
+        {client:"Emily Davis", service:"Electrical Wiring", date:"2023-08-27 09:00 AM", status:"Completed"},
+        {client:"Robert Wilson", service:"Deep Cleaning", date:"2023-08-28 11:30 AM", status:"Confirmed"},
+        {client:"Jessica Thompson", service:"Wall Painting", date:"2023-08-29 03:00 PM", status:"Pending"}
+      ]
+    };
+
+    // Notifications Data
+    const notificationsData = [
+      {
+        id: 1,
+        title: "New Appointment Request",
+        message: "Michael Brown requested AC installation for tomorrow.",
+        time: "10 min ago",
+        unread: true
+      },
+      {
+        id: 2,
+        title: "Payment Received",
+        message: "Payment of ₹1,500 received for plumbing service.",
+        time: "1 hour ago",
+        unread: true
+      },
+      {
+        id: 3,
+        title: "Appointment Reminder",
+        message: "You have an appointment with Sarah Johnson in 2 hours.",
+        time: "2 hours ago",
+        unread: true
+      },
+      {
+        id: 4,
+        title: "Service Completed",
+        message: "Electrical wiring service for Emily Davis marked as completed.",
+        time: "1 day ago",
+        unread: false
+      },
+      {
+        id: 5,
+        title: "Customer Review",
+        message: "Robert Wilson left a 5-star review for your cleaning service.",
+        time: "2 days ago",
+        unread: false
+      }
+    ];
+
+    // Fill summary cards
+    document.getElementById("upcomingCount").innerText = dashboardData.upcoming;
+    document.getElementById("completedCount").innerText = dashboardData.completed;
+    document.getElementById("pendingCount").innerText = dashboardData.pending;
+    document.getElementById("totalEarnings").innerText = "₹"+dashboardData.earnings.toLocaleString();
+
+    // Recent appointments table
+    const tbody = document.getElementById("recentAppointments");
+    dashboardData.recent.forEach(appt => {
+      const row = `<tr>
+        <td>${appt.client}</td>
+        <td>${appt.service}</td>
+        <td>${appt.date}</td>
+        <td><span class="status ${appt.status.toLowerCase()}">${appt.status}</span></td>
+      </tr>`;
+      tbody.innerHTML += row;
+    });
+
+    // Populate notifications
+    function populateNotifications() {
+      const notificationsList = document.getElementById("notificationsList");
+      const unreadCount = notificationsData.filter(n => n.unread).length;
+      
+      // Update badge count
+      const badge = document.querySelector(".notification-badge");
+      badge.textContent = unreadCount;
+      
+      // Clear existing notifications
+      notificationsList.innerHTML = "";
+      
+      if (notificationsData.length === 0) {
+        notificationsList.innerHTML = '<div class="notification-empty">No notifications</div>';
+        return;
+      }
+      
+      // Add notifications
+      notificationsData.forEach(notification => {
+        const notificationItem = document.createElement("div");
+        notificationItem.className = `notification-item ${notification.unread ? 'unread' : ''}`;
+        notificationItem.innerHTML = `
+          <div class="notification-title">${notification.title}</div>
+          <div class="notification-message">${notification.message}</div>
+          <div class="notification-time">${notification.time}</div>
+        `;
+        
+        // Mark as read when clicked
+        notificationItem.addEventListener("click", () => {
+          if (notification.unread) {
+            notification.unread = false;
+            notificationItem.classList.remove("unread");
+            populateNotifications(); // Refresh notifications
+          }
+        });
+        
+        notificationsList.appendChild(notificationItem);
+      });
+    }
+
+    // Toggle notifications dropdown
+    function toggleNotifications() {
+      const dropdown = document.getElementById("notificationsDropdown");
+      dropdown.classList.toggle("active");
+    }
+
+    // Mark all notifications as read
+    function markAllAsRead() {
+      notificationsData.forEach(notification => {
+        notification.unread = false;
+      });
+      populateNotifications();
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener("click", (event) => {
+      const dropdown = document.getElementById("notificationsDropdown");
+      const notificationIcon = document.getElementById("notificationIcon");
+      
+      if (!notificationIcon.contains(event.target) && !dropdown.contains(event.target)) {
+        dropdown.classList.remove("active");
+      }
+    });
+
+    // Initialize charts after DOM is fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      // Populate notifications
+      populateNotifications();
+      
+      // Add event listeners
+      document.getElementById("notificationIcon").addEventListener("click", toggleNotifications);
+      document.getElementById("markAllRead").addEventListener("click", (e) => {
+        e.preventDefault();
+        markAllAsRead();
+      });
+
+      // Line Chart
+      const lineCtx = document.getElementById('lineChart').getContext('2d');
+      const lineChart = new Chart(lineCtx, {
+        type: 'line',
+        data: {
+          labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          datasets: [{
+            label: 'Appointments',
+            data: [5, 8, 6, 7, 9, 12, 10],
+            borderColor: '#2563eb',
+            backgroundColor: 'rgba(37, 99, 235, 0.1)',
+            fill: true,
+            tension: 0.4,
+            borderWidth: 2,
+            pointBackgroundColor: '#2563eb',
+            pointRadius: 4,
+            pointHoverRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              grid: {
+                color: 'rgba(0, 0, 0, 0.05)'
+              },
+              ticks: {
+                precision: 0
+              }
+            },
+            x: {
+              grid: {
+                display: false
+              }
+            }
+          }
+        }
+      });
+
+      // Bar Chart
+      const barCtx = document.getElementById('barChart').getContext('2d');
+      const barChart = new Chart(barCtx, {
+        type: 'bar',
+        data: {
+          labels: ['Plumbing', 'Electrical', 'Cleaning', 'Painting'],
+          datasets: [{
+            data: [12, 8, 15, 7],
+            backgroundColor: ['#3b82f6', '#10b981', '#f59e0b', '#ef4444'],
+            borderRadius: 4,
+            borderSkipped: false,
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              grid: {
+                color: 'rgba(0, 0, 0, 0.05)'
+              },
+              ticks: {
+                precision: 0
+              }
+            },
+            x: {
+              grid: {
+                display: false
+              }
+            }
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

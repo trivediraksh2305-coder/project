@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services | ServicePro</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1e40af;
+      --secondary: #64748b;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --light: #f8fafc;
+      --dark: #1e293b;
+      --sidebar-width: 260px;
+      --border-radius: 12px;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      display: flex;
+      background: #f1f5f9;
+      color: #334155;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: var(--sidebar-width);
+      background: linear-gradient(180deg, var(--dark), #0f172a);
+      color: white;
+      position: fixed;
+      height: 100vh;
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+      z-index: 1000;
+    }
+
+    .sidebar-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 32px;
+      padding: 0 12px;
+    }
+
+    .sidebar-header h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: white;
+    }
+
+    .sidebar-header i {
+      margin-right: 12px;
+      font-size: 28px;
+      color: var(--primary);
+    }
+
+    .sidebar-menu {
+      list-style: none;
+      flex-grow: 1;
+    }
+
+    .sidebar-menu li {
+      margin-bottom: 8px;
+    }
+
+    .sidebar-menu a {
+      color: #cbd5e1;
+      text-decoration: none;
+      padding: 12px 16px;
+      border-radius: var(--border-radius);
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      font-weight: 500;
+    }
+
+    .sidebar-menu a:hover, .sidebar-menu a.active {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+    }
+
+    .sidebar-menu i {
+      margin-right: 12px;
+      font-size: 18px;
+      width: 24px;
+      text-align: center;
+    }
+
+    .sidebar-footer {
+      padding: 16px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: auto;
+    }
+
+    .sidebar-footer a {
+      color: #cbd5e1;
+      text-decoration: none;
+      padding: 12px 16px;
+      border-radius: var(--border-radius);
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      font-weight: 500;
+    }
+
+    .sidebar-footer a:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+    }
+
+    /* Main Content */
+    .main {
+      flex: 1;
+      margin-left: var(--sidebar-width);
+      padding: 24px;
+      transition: var(--transition);
+    }
+
+    /* Topbar */
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      background: white;
+      padding: 16px 24px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+    }
+
+    .page-title h1 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    .page-title p {
+      color: var(--secondary);
+      font-size: 14px;
+      margin-top: 4px;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      position: relative;
+    }
+
+    .notifications {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .notifications i {
+      font-size: 20px;
+      color: var(--secondary);
+    }
+
+    .notification-badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: var(--danger);
+      color: white;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: var(--border-radius);
+      transition: var(--transition);
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .user-profile:hover {
+      background: #f1f5f9;
+    }
+
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 600;
+    }
+
+    .user-details {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .user-details .name {
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    .user-details .role {
+      font-size: 12px;
+      color: var(--secondary);
+    }
+
+    /* Notification Dropdown */
+    .notifications-dropdown {
+      position: absolute;
+      top: 50px;
+      right: 0;
+      width: 320px;
+      background: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      z-index: 1000;
+      display: none;
+      overflow: hidden;
+    }
+
+    .notifications-dropdown.active {
+      display: block;
+    }
+
+    .notifications-header {
+      padding: 16px;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .notifications-header h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    .notifications-header a {
+      color: var(--primary);
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    .notifications-list {
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .notification-item {
+      padding: 16px;
+      border-bottom: 1px solid #f1f5f9;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .notification-item:hover {
+      background: #f8fafc;
+    }
+
+    .notification-item.unread {
+      background: rgba(37, 99, 235, 0.05);
+    }
+
+    .notification-title {
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+
+    .notification-message {
+      font-size: 14px;
+      color: var(--secondary);
+      margin-bottom: 8px;
+    }
+
+    .notification-time {
+      font-size: 12px;
+      color: #94a3b8;
+    }
+
+    .notification-empty {
+      padding: 32px 16px;
+      text-align: center;
+      color: var(--secondary);
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      background: white;
+      border-radius: var(--border-radius);
+      padding: 16px 24px;
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 10000;
+      transform: translateX(150%);
+      transition: transform 0.3s ease;
+    }
+
+    .toast.show {
+      transform: translateX(0);
+    }
+
+    .toast.success {
+      border-left: 4px solid var(--success);
+    }
+
+    .toast.warning {
+      border-left: 4px solid var(--warning);
+    }
+
+    .toast.error {
+      border-left: 4px solid var(--danger);
+    }
+
+    .toast i {
+      font-size: 20px;
+    }
+
+    .toast.success i {
+      color: var(--success);
+    }
+
+    .toast.warning i {
+      color: var(--warning);
+    }
+
+    .toast.error i {
+      color: var(--danger);
+    }
+
+    /* Services Page Specific Styles */
+    .page-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: var(--border-radius);
+      padding: 0 12px;
+      height: 44px;
+    }
+
+    .search-box input {
+      border: none;
+      padding: 10px 0;
+      width: 250px;
+      outline: none;
+    }
+
+    .search-box i {
+      color: var(--secondary);
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border-radius: var(--border-radius);
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--primary);
+      color: var(--primary);
+    }
+
+    .btn-outline:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .service-card {
+      background: white;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    .service-image {
+      height: 160px;
+      background: linear-gradient(120deg, #e2e8f0, #cbd5e1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--secondary);
+      font-size: 20px;
+    }
+
+    .service-content {
+      padding: 20px;
+    }
+
+    .service-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+
+    .service-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    .service-price {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .service-meta {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .service-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: var(--secondary);
+    }
+
+    .service-description {
+      color: var(--secondary);
+      margin-bottom: 20px;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .service-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .service-status {
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      display: inline-block;
+    }
+
+    .status-active {
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--success);
+    }
+
+    .status-inactive {
+      background: rgba(100, 116, 139, 0.1);
+      color: var(--secondary);
+    }
+
+    .categories {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .category-filter {
+      padding: 8px 16px;
+      border-radius: 20px;
+      background: white;
+      border: 1px solid #e2e8f0;
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 14px;
+    }
+
+    .category-filter.active, .category-filter:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: var(--border-radius);
+      width: 100%;
+      max-width: 600px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .modal-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    .close-modal {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: var(--secondary);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: var(--dark);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #e2e8f0;
+      border-radius: var(--border-radius);
+      font-size: 14px;
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    /* Service Detail View */
+    .service-detail {
+      display: none;
+      background: white;
+      border-radius: var(--border-radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+    }
+
+    .detail-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 20px;
+    }
+
+    .detail-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    .detail-price {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .detail-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .detail-image {
+      height: 200px;
+      background: linear-gradient(120deg, #e2e8f0, #cbd5e1);
+      border-radius: var(--border-radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--secondary);
+      font-size: 24px;
+    }
+
+    .detail-info {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .detail-meta {
+      display: flex;
+      gap: 24px;
+    }
+
+    .detail-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .detail-meta-item h4 {
+      font-size: 12px;
+      color: var(--secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .detail-meta-item p {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--dark);
+    }
+
+    .detail-description {
+      color: var(--secondary);
+      line-height: 1.6;
+    }
+
+    .detail-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .services-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      }
+      
+      .detail-content {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        transform: translateX(-100%);
+        width: 280px;
+      }
+      
+      .sidebar.active {
+        transform: translateX(0);
+      }
+      
+      .main {
+        margin-left: 0;
+        width: 100%;
+      }
+      
+      .page-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .search-box {
+        width: 100%;
+      }
+      
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .notifications-dropdown {
+        width: 280px;
+        right: -20px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .user-details {
+        display: none;
+      }
+      
+      .service-header {
+        flex-direction: column;
+        gap: 12px;
+      }
+      
+      .service-actions {
+        flex-direction: column;
+      }
+      
+      .service-actions button {
+        width: 100%;
+      }
+      
+      .detail-meta {
+        flex-direction: column;
+        gap: 16px;
+      }
+      
+      .notifications-dropdown {
+        width: 260px;
+        right: -40px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <i class="fas fa-concierge-bell"></i>
+      <h2>ServicePro</h2>
+    </div>
+    
+    <ul class="sidebar-menu">
+      <li><a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+      <li><a href="appointments.html"><i class="fas fa-calendar-check"></i> Appointments</a></li>
+      <li><a href="services.html" class="active"><i class="fas fa-tools"></i> Services</a></li>
+      <li><a href="earnings.html"><i class="fas fa-chart-line"></i> Earnings</a></li>
+      <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+    </ul>
+    
+    <div class="sidebar-footer">
+      <a href="login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+    <!-- Topbar -->
+    <div class="topbar">
+      <div class="page-title">
+        <h1>Services</h1>
+        <p>Manage your service offerings and pricing</p>
+      </div>
+      
+      <div class="user-info">
+        <!-- Notifications with dropdown -->
+        <div class="notifications" id="notificationIcon">
+          <i class="fas fa-bell"></i>
+          <span class="notification-badge">3</span>
+          
+          <!-- Notifications Dropdown -->
+          <div class="notifications-dropdown" id="notificationsDropdown">
+            <div class="notifications-header">
+              <h3>Notifications</h3>
+              <a href="#" id="markAllRead">Mark all as read</a>
+            </div>
+            <div class="notifications-list" id="notificationsList">
+              <!-- Notifications will be populated by JavaScript -->
+            </div>
+          </div>
+        </div>
+        
+        <!-- User Profile - Clickable to settings -->
+        <a href="settings.html" class="user-profile">
+          <div class="avatar">JD</div>
+          <div class="user-details">
+            <span class="name">John Doe</span>
+            <span class="role">Service Provider</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Service Detail View -->
+    <div class="service-detail" id="service-detail">
+      <div class="detail-header">
+        <h2 class="detail-title" id="detail-title">Plumbing Repair</h2>
+        <div class="detail-price" id="detail-price">₹120</div>
+      </div>
+      
+      <div class="detail-content">
+        <div class="detail-image" id="detail-image">
+          <i class="fas fa-faucet fa-3x"></i>
+        </div>
+        
+        <div class="detail-info">
+          <div class="detail-meta">
+            <div class="detail-meta-item">
+              <h4>Category</h4>
+              <p id="detail-category">Plumbing</p>
+            </div>
+            <div class="detail-meta-item">
+              <h4>Duration</h4>
+              <p id="detail-duration">1.5 hours</p>
+            </div>
+            <div class="detail-meta-item">
+              <h4>Bookings</h4>
+              <p id="detail-bookings">42</p>
+            </div>
+          </div>
+          
+          <div class="detail-description" id="detail-description">
+            Fix leaking pipes, clogged drains, toilet repairs, and other common plumbing issues with expert service. Our certified plumbers arrive on time with all necessary tools and equipment to resolve your plumbing problems efficiently.
+          </div>
+        </div>
+      </div>
+      
+      <div class="detail-actions">
+        <button class="btn btn-outline" id="back-to-list">
+          <i class="fas fa-arrow-left"></i> Back to List
+        </button>
+        <button class="btn btn-primary">
+          <i class="fas fa-edit"></i> Edit Service
+        </button>
+      </div>
+    </div>
+
+    <!-- Page Actions -->
+    <div class="page-actions">
+      <div class="categories">
+        <button class="category-filter active" data-category="all">All Services</button>
+        <button class="category-filter" data-category="plumbing">Plumbing</button>
+        <button class="category-filter" data-category="electrical">Electrical</button>
+        <button class="category-filter" data-category="cleaning">Cleaning</button>
+        <button class="category-filter" data-category="painting">Painting</button>
+      </div>
+      
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Search services..." id="search-input">
+      </div>
+      
+      <button class="btn btn-primary" id="add-service-btn">
+        <i class="fas fa-plus"></i> Add New Service
+      </button>
+    </div>
+
+    <!-- Services Grid -->
+    <div class="services-grid" id="services-container">
+      <!-- Services will be dynamically inserted here -->
+    </div>
+
+    <!-- Add Service Modal -->
+    <div class="modal" id="service-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Add New Service</h3>
+          <button class="close-modal">&times;</button>
+        </div>
+        
+        <form id="service-form">
+          <div class="form-group">
+            <label for="service-name">Service Name</label>
+            <input type="text" id="service-name" class="form-control" placeholder="e.g., Plumbing Repair" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="service-category">Category</label>
+            <select id="service-category" class="form-control" required>
+              <option value="">Select a category</option>
+              <option value="plumbing">Plumbing</option>
+              <option value="electrical">Electrical</option>
+              <option value="cleaning">Cleaning</option>
+              <option value="painting">Painting</option>
+              <option value="appliance">Appliance Repair</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="service-price">Price (₹)</label>
+            <input type="number" id="service-price" class="form-control" placeholder="e.g., 120" required min="0">
+          </div>
+          
+          <div class="form-group">
+            <label for="service-duration">Duration (hours)</label>
+            <input type="number" id="service-duration" class="form-control" placeholder="e.g., 1.5" step="0.5" required min="0.5">
+          </div>
+          
+          <div class="form-group">
+            <label for="service-description">Description</label>
+            <textarea id="service-description" class="form-control" rows="3" placeholder="Describe the service..." required></textarea>
+          </div>
+          
+          <div class="form-actions">
+            <button type="button" class="btn btn-outline" id="cancel-btn">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Service</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Edit Service Modal -->
+    <div class="modal" id="edit-service-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Edit Service</h3>
+          <button class="close-modal">&times;</button>
+        </div>
+        
+        <form id="edit-service-form">
+          <input type="hidden" id="edit-service-id">
+          
+          <div class="form-group">
+            <label for="edit-service-name">Service Name</label>
+            <input type="text" id="edit-service-name" class="form-control" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="edit-service-category">Category</label>
+            <select id="edit-service-category" class="form-control" required>
+              <option value="plumbing">Plumbing</option>
+              <option value="electrical">Electrical</option>
+              <option value="cleaning">Cleaning</option>
+              <option value="painting">Painting</option>
+              <option value="appliance">Appliance Repair</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="edit-service-price">Price (₹)</label>
+            <input type="number" id="edit-service-price" class="form-control" required min="0">
+          </div>
+          
+          <div class="form-group">
+            <label for="edit-service-duration">Duration (hours)</label>
+            <input type="number" id="edit-service-duration" class="form-control" step="0.5" required min="0.5">
+          </div>
+          
+          <div class="form-group">
+            <label for="edit-service-description">Description</label>
+            <textarea id="edit-service-description" class="form-control" rows="3" required></textarea>
+          </div>
+          
+          <div class="form-actions">
+            <button type="button" class="btn btn-outline" id="edit-cancel-btn">Cancel</button>
+            <button type="submit" class="btn btn-primary">Update Service</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+      <i class="fas fa-check-circle"></i>
+      <div class="toast-message">Action completed successfully!</div>
+    </div>
+  </div>
+
+  <script>
+    // Service data structure
+    let services = [
+      {
+        id: 1,
+        name: "Plumbing Repair",
+        category: "plumbing",
+        price: 120,
+        duration: 1.5,
+        bookings: 42,
+        description: "Fix leaking pipes, clogged drains, toilet repairs, and other common plumbing issues with expert service.",
+        icon: "fa-faucet"
+      },
+      {
+        id: 2,
+        name: "Electrical Wiring",
+        category: "electrical",
+        price: 200,
+        duration: 2,
+        bookings: 28,
+        description: "Professional electrical wiring installation and repair for homes and offices. Certified electricians.",
+        icon: "fa-bolt"
+      },
+      {
+        id: 3,
+        name: "Deep Cleaning",
+        category: "cleaning",
+        price: 180,
+        duration: 3,
+        bookings: 56,
+        description: "Thorough deep cleaning service for homes and offices. Includes kitchen, bathroom, and living areas.",
+        icon: "fa-soap"
+      },
+      {
+        id: 4,
+        name: "Interior Painting",
+        category: "painting",
+        price: 320,
+        duration: 4,
+        bookings: 19,
+        description: "Professional interior painting service. We provide quality paints and equipment for the best results.",
+        icon: "fa-paint-roller"
+      },
+      {
+        id: 5,
+        name: "AC Installation",
+        category: "electrical",
+        price: 350,
+        duration: 3,
+        bookings: 15,
+        description: "Professional AC installation service. Includes unit installation, testing, and demonstration.",
+        icon: "fa-toolbox"
+      },
+      {
+        id: 6,
+        name: "Appliance Repair",
+        category: "appliance",
+        price: 110,
+        duration: 1.5,
+        bookings: 23,
+        description: "Repair service for home appliances including refrigerators, washing machines, ovens, and more.",
+        icon: "fa-wrench"
+      }
+    ];
+
+    // Notifications Data
+    const notificationsData = [
+      {
+        id: 1,
+        title: "New Service Request",
+        message: "A client has requested your Plumbing Repair service.",
+        time: "15 min ago",
+        unread: true
+      },
+      {
+        id: 2,
+        title: "Service Popularity Update",
+        message: "Your Deep Cleaning service is trending this week.",
+        time: "2 hours ago",
+        unread: true
+      },
+      {
+        id: 3,
+        title: "New Review",
+        message: "Sarah Johnson left a 5-star review for your service.",
+        time: "1 day ago",
+        unread: true
+      },
+      {
+        id: 4,
+        title: "Service Update",
+        message: "Consider updating your Electrical Wiring service pricing.",
+        time: "2 days ago",
+        unread: false
+      },
+      {
+        id: 5,
+        title: "Weekly Report",
+        message: "Your services had 12 bookings this week.",
+        time: "3 days ago",
+        unread: false
+      }
+    ];
+
+    // DOM elements
+    const servicesContainer = document.getElementById('services-container');
+    const serviceDetail = document.getElementById('service-detail');
+    const searchInput = document.getElementById('search-input');
+    const categoryFilters = document.querySelectorAll('.category-filter');
+    const addServiceBtn = document.getElementById('add-service-btn');
+    const serviceModal = document.getElementById('service-modal');
+    const editServiceModal = document.getElementById('edit-service-modal');
+    const closeModalBtns = document.querySelectorAll('.close-modal');
+    const cancelBtn = document.getElementById('cancel-btn');
+    const editCancelBtn = document.getElementById('edit-cancel-btn');
+    const serviceForm = document.getElementById('service-form');
+    const editServiceForm = document.getElementById('edit-service-form');
+    const backToListBtn = document.getElementById('back-to-list');
+    const notificationIcon = document.getElementById('notificationIcon');
+    const notificationsDropdown = document.getElementById('notificationsDropdown');
+    const notificationsList = document.getElementById('notificationsList');
+    const markAllReadBtn = document.getElementById('markAllRead');
+
+    // Show toast notification
+    function showToast(message, type = "success") {
+      const toast = document.getElementById("toast");
+      const toastIcon = toast.querySelector("i");
+      const toastMessage = toast.querySelector(".toast-message");
+      
+      // Set toast content
+      toastMessage.textContent = message;
+      toast.className = `toast ${type}`;
+      
+      // Set icon based on type
+      if (type === "success") {
+        toastIcon.className = "fas fa-check-circle";
+      } else if (type === "warning") {
+        toastIcon.className = "fas fa-exclamation-triangle";
+      } else if (type === "error") {
+        toastIcon.className = "fas fa-times-circle";
+      }
+      
+      // Show toast
+      toast.classList.add("show");
+      
+      // Hide toast after 3 seconds
+      setTimeout(() => {
+        toast.classList.remove("show");
+      }, 3000);
+    }
+
+    // Populate notifications
+    function populateNotifications() {
+      const unreadCount = notificationsData.filter(n => n.unread).length;
+      
+      // Update badge count
+      const badge = document.querySelector(".notification-badge");
+      badge.textContent = unreadCount;
+      
+      // Clear existing notifications
+      notificationsList.innerHTML = "";
+      
+      if (notificationsData.length === 0) {
+        notificationsList.innerHTML = '<div class="notification-empty">No notifications</div>';
+        return;
+      }
+      
+      // Add notifications
+      notificationsData.forEach(notification => {
+        const notificationItem = document.createElement("div");
+        notificationItem.className = `notification-item ${notification.unread ? 'unread' : ''}`;
+        notificationItem.innerHTML = `
+          <div class="notification-title">${notification.title}</div>
+          <div class="notification-message">${notification.message}</div>
+          <div class="notification-time">${notification.time}</div>
+        `;
+        
+        // Mark as read when clicked
+        notificationItem.addEventListener("click", () => {
+          if (notification.unread) {
+            notification.unread = false;
+            notificationItem.classList.remove("unread");
+            populateNotifications();
+          }
+        });
+        
+        notificationsList.appendChild(notificationItem);
+      });
+    }
+
+    // Toggle notifications dropdown
+    function toggleNotifications() {
+      notificationsDropdown.classList.toggle("active");
+    }
+
+    // Mark all notifications as read
+    function markAllAsRead() {
+      notificationsData.forEach(notification => {
+        notification.unread = false;
+      });
+      populateNotifications();
+      showToast("All notifications marked as read", "success");
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener("click", (event) => {
+      if (notificationIcon && notificationsDropdown && !notificationIcon.contains(event.target) && !notificationsDropdown.contains(event.target)) {
+        notificationsDropdown.classList.remove("active");
+      }
+    });
+
+    // Initialize the page
+    function init() {
+      renderServices(services);
+      populateNotifications();
+      setupEventListeners();
+    }
+
+    // Render services to the page
+    function renderServices(servicesToRender) {
+      servicesContainer.innerHTML = '';
+      
+      if (servicesToRender.length === 0) {
+        servicesContainer.innerHTML = `
+          <div class="service-card" style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+            <div style="color: var(--secondary);">
+              <i class="fas fa-tools" style="font-size: 48px; margin-bottom: 16px;"></i>
+              <h3>No services found</h3>
+              <p>Try adjusting your filters or add a new service</p>
+            </div>
+          </div>
+        `;
+        return;
+      }
+      
+      servicesToRender.forEach(service => {
+        const serviceCard = document.createElement('div');
+        serviceCard.className = 'service-card';
+        serviceCard.dataset.id = service.id;
+        serviceCard.dataset.category = service.category;
+        
+        serviceCard.innerHTML = `
+          <div class="service-image">
+            <i class="fas ${service.icon} fa-3x"></i>
+          </div>
+          <div class="service-content">
+            <div class="service-header">
+              <h3 class="service-title">${service.name}</h3>
+              <div class="service-price">₹${service.price}</div>
+            </div>
+            <div class="service-meta">
+              <div class="service-meta-item">
+                <i class="fas fa-clock"></i> ${service.duration} hours
+              </div>
+              <div class="service-meta-item">
+                <i class="fas fa-calendar-check"></i> ${service.bookings} bookings
+              </div>
+            </div>
+            <p class="service-description">
+              ${service.description}
+            </p>
+            <div class="service-actions">
+              <button class="btn btn-outline edit-btn">
+                <i class="fas fa-edit"></i> Edit
+              </button>
+              <button class="btn btn-primary details-btn">
+                <i class="fas fa-info-circle"></i> Details
+              </button>
+            </div>
+          </div>
+        `;
+        
+        servicesContainer.appendChild(serviceCard);
+      });
+    }
+
+    // Set up event listeners
+    function setupEventListeners() {
+      // Category filtering
+      categoryFilters.forEach(filter => {
+        filter.addEventListener('click', () => {
+          const category = filter.dataset.category;
+          
+          categoryFilters.forEach(f => f.classList.remove('active'));
+          filter.classList.add('active');
+          
+          if (category === 'all') {
+            renderServices(services);
+          } else {
+            const filteredServices = services.filter(service => service.category === category);
+            renderServices(filteredServices);
+          }
+        });
+      });
+      
+      // Search functionality
+      searchInput.addEventListener('input', () => {
+        const searchTerm = searchInput.value.toLowerCase();
+        const activeCategory = document.querySelector('.category-filter.active').dataset.category;
+        
+        let filteredServices = services;
+        
+        // Apply category filter if not "all"
+        if (activeCategory !== 'all') {
+          filteredServices = filteredServices.filter(service => service.category === activeCategory);
+        }
+        
+        // Apply search filter
+        if (searchTerm) {
+          filteredServices = filteredServices.filter(service => 
+            service.name.toLowerCase().includes(searchTerm) || 
+            service.description.toLowerCase().includes(searchTerm)
+          );
+        }
+        
+        renderServices(filteredServices);
+      });
+      
+      // Modal functionality
+      addServiceBtn.addEventListener('click', () => {
+        serviceModal.style.display = 'flex';
+      });
+      
+      closeModalBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          serviceModal.style.display = 'none';
+          editServiceModal.style.display = 'none';
+        });
+      });
+      
+      cancelBtn.addEventListener('click', () => {
+        serviceModal.style.display = 'none';
+      });
+      
+      editCancelBtn.addEventListener('click', () => {
+        editServiceModal.style.display = 'none';
+      });
+      
+      // Form submissions
+      serviceForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        addNewService();
+      });
+      
+      editServiceForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        updateService();
+      });
+      
+      // Back to list button
+      backToListBtn.addEventListener('click', () => {
+        serviceDetail.style.display = 'none';
+      });
+      
+      // Notifications functionality
+      notificationIcon.addEventListener('click', toggleNotifications);
+      markAllReadBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        markAllAsRead();
+      });
+      
+      // Event delegation for dynamic buttons
+      servicesContainer.addEventListener('click', (e) => {
+        const serviceCard = e.target.closest('.service-card');
+        if (!serviceCard) return;
+        
+        const serviceId = parseInt(serviceCard.dataset.id);
+        const service = services.find(s => s.id === serviceId);
+        
+        if (e.target.classList.contains('edit-btn') || e.target.closest('.edit-btn')) {
+          openEditModal(service);
+        } else if (e.target.classList.contains('details-btn') || e.target.closest('.details-btn')) {
+          showServiceDetails(service);
+        }
+      });
+    }
+
+    // Add new service
+    function addNewService() {
+      const name = document.getElementById('service-name').value;
+      const category = document.getElementById('service-category').value;
+      const price = parseFloat(document.getElementById('service-price').value);
+      const duration = parseFloat(document.getElementById('service-duration').value);
+      const description = document.getElementById('service-description').value;
+      
+      const newService = {
+        id: services.length > 0 ? Math.max(...services.map(s => s.id)) + 1 : 1,
+        name,
+        category,
+        price,
+        duration,
+        bookings: 0,
+        description,
+        icon: getIconForCategory(category)
+      };
+      
+      services.unshift(newService); // Add to beginning of array
+      renderServices(services);
+      serviceModal.style.display = 'none';
+      serviceForm.reset();
+      
+      // Show the new service by activating the "All Services" filter
+      document.querySelector('[data-category="all"]').click();
+      
+      showToast(`"${name}" service added successfully!`, "success");
+    }
+
+    // Open edit modal with service data
+    function openEditModal(service) {
+      document.getElementById('edit-service-id').value = service.id;
+      document.getElementById('edit-service-name').value = service.name;
+      document.getElementById('edit-service-category').value = service.category;
+      document.getElementById('edit-service-price').value = service.price;
+      document.getElementById('edit-service-duration').value = service.duration;
+      document.getElementById('edit-service-description').value = service.description;
+      
+      editServiceModal.style.display = 'flex';
+    }
+
+    // Update service
+    function updateService() {
+      const id = parseInt(document.getElementById('edit-service-id').value);
+      const name = document.getElementById('edit-service-name').value;
+      const category = document.getElementById('edit-service-category').value;
+      const price = parseFloat(document.getElementById('edit-service-price').value);
+      const duration = parseFloat(document.getElementById('edit-service-duration').value);
+      const description = document.getElementById('edit-service-description').value;
+      
+      const serviceIndex = services.findIndex(s => s.id === id);
+      
+      if (serviceIndex !== -1) {
+        services[serviceIndex] = {
+          ...services[serviceIndex],
+          name,
+          category,
+          price,
+          duration,
+          description,
+          icon: getIconForCategory(category)
+        };
+        
+        renderServices(services);
+        editServiceModal.style.display = 'none';
+        showToast(`"${name}" service updated successfully!`, "success");
+      }
+    }
+
+    // Show service details
+    function showServiceDetails(service) {
+      document.getElementById('detail-title').textContent = service.name;
+      document.getElementById('detail-price').textContent = `₹${service.price}`;
+      document.getElementById('detail-category').textContent = service.category.charAt(0).toUpperCase() + service.category.slice(1);
+      document.getElementById('detail-duration').textContent = `${service.duration} hours`;
+      document.getElementById('detail-bookings').textContent = service.bookings;
+      document.getElementById('detail-description').textContent = service.description;
+      document.getElementById('detail-image').innerHTML = `<i class="fas ${service.icon} fa-3x"></i>`;
+      
+      serviceDetail.style.display = 'block';
+      
+      // Update edit button in detail view
+      const editBtn = serviceDetail.querySelector('.btn-primary');
+      editBtn.onclick = () => openEditModal(service);
+    }
+
+    // Get icon for category
+    function getIconForCategory(category) {
+      const icons = {
+        plumbing: 'fa-faucet',
+        electrical: 'fa-bolt',
+        cleaning: 'fa-soap',
+        painting: 'fa-paint-roller',
+        appliance: 'fa-wrench'
+      };
+      
+      return icons[category] || 'fa-tools';
+    }
+
+    // Initialize the page
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>

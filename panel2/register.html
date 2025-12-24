@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Provider Portal - Register</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 850px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            background: #4a6cf7;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+        
+        .header h1 {
+            font-weight: 600;
+            font-size: 28px;
+        }
+        
+        .header p {
+            margin-top: 8px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .graphic-section {
+            flex: 1;
+            min-width: 300px;
+            background: #f0f4ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+        
+        .graphic-container {
+            text-align: center;
+            max-width: 300px;
+        }
+        
+        .graphic-container img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .graphic-container h3 {
+            margin-top: 20px;
+            color: #324c9a;
+            font-weight: 600;
+        }
+        
+        .form-section {
+            flex: 1;
+            min-width: 300px;
+            padding: 30px;
+        }
+        
+        .form-container {
+            max-width: 350px;
+            margin: 0 auto;
+        }
+        
+        .form-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #2d3954;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #2d3954;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 14px 15px;
+            border: 1px solid #e6e6e6;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+        
+        .input-group input:focus {
+            border-color: #4a6cf7;
+            box-shadow: 0 3px 10px rgba(74, 108, 247, 0.1);
+            outline: none;
+        }
+        
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+        
+        .forgot-password a {
+            color: #4a6cf7;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: #4a6cf7;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background: #3a5cd6;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 108, 247, 0.4);
+        }
+        
+        .divider {
+            text-align: center;
+            margin: 25px 0;
+            position: relative;
+        }
+        
+        .divider:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            height: 1px;
+            background: #e6e6e6;
+        }
+        
+        .divider span {
+            background: white;
+            position: relative;
+            padding: 0 15px;
+            color: #7e7e7e;
+            font-size: 14px;
+        }
+        
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f5f7fa;
+            border: 1px solid #e6e6e6;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .social-btn.google {
+            color: #db4437;
+        }
+        
+        .social-btn.facebook {
+            color: #4267B2;
+        }
+        
+        .social-btn.linkedin {
+            color: #0077b5;
+        }
+        
+        .switch-form {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 15px;
+            color: #7e7e7e;
+        }
+        
+        .switch-form a {
+            color: #4a6cf7;
+            text-decoration: none;
+            font-weight: 600;
+            margin-left: 5px;
+        }
+        
+        .terms {
+            font-size: 13px;
+            color: #7e7e7e;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .terms a {
+            color: #4a6cf7;
+            text-decoration: none;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+            
+            .graphic-section {
+                order: 2;
+                padding: 20px;
+            }
+            
+            .form-section {
+                order: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Service Provider Portal</h1>
+            <p>Create your account to get started</p>
+        </div>
+        
+        <div class="content">
+            <div class="graphic-section">
+                <div class="graphic-container">
+                    <svg width="250" height="250" viewBox="0 0 500 500">
+                        <circle cx="250" cy="250" r="200" fill="#4a6cf7" opacity="0.1"/>
+                        <path d="M350,250 C350,150 300,100 250,100 C200,100 150,150 150,250 C150,350 200,400 250,400 C300,400 350,350 350,250 Z" fill="#4a6cf7" opacity="0.2"/>
+                        <path d="M300,250 C300,200 275,150 250,150 C225,150 200,200 200,250 C200,300 225,350 250,350 C275,350 300,300 300,250 Z" fill="#4a6cf7" opacity="0.3"/>
+                        <circle cx="250" cy="250" r="50" fill="#4a6cf7"/>
+                        <path d="M240,230 L250,250 L270,220" stroke="white" stroke-width="8" fill="none" stroke-linecap="round"/>
+                        <circle cx="350" cy="150" r="30" fill="#4a6cf7" opacity="0.5"/>
+                        <circle cx="150" cy="350" r="20" fill="#4a6cf7" opacity="0.5"/>
+                    </svg>
+                    <h3>Join Our Service Network</h3>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <div class="form-container">
+                    <!-- Register Form -->
+                    <div id="register-form">
+                        <h2 class="form-title">Create New Account</h2>
+                        
+                        <div class="input-group">
+                            <label for="register-name">Full Name</label>
+                            <input type="text" id="register-name" placeholder="Enter your full name">
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="register-email">Email Address</label>
+                            <input type="email" id="register-email" placeholder="Enter your email">
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="register-password">Password</label>
+                            <input type="password" id="register-password" placeholder="Create a password">
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="register-confirm">Confirm Password</label>
+                            <input type="password" id="register-confirm" placeholder="Confirm your password">
+                        </div>
+                        
+                        <button class="btn" onclick="window.location.href='login.html'">Create Account</button>
+                        
+                        <div class="divider"><span>Or sign up with</span></div>
+                        
+                        <div class="social-login">
+                            <div class="social-btn google">
+                                <i class="fab fa-google"></i>
+                            </div>
+                            <div class="social-btn facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </div>
+                            <div class="social-btn linkedin">
+                                <i class="fab fa-linkedin-in"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="switch-form">
+                            Already have an account? <a href="login.html">Login now</a>
+                        </div>
+                        
+                        <div class="terms">
+                            By creating an account, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple form validation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Register form validation
+            const registerBtn = document.querySelector('#register-form .btn');
+            if (registerBtn) {
+                registerBtn.addEventListener('click', function(e) {
+                    const name = document.getElementById('register-name').value;
+                    const email = document.getElementById('register-email').value;
+                    const password = document.getElementById('register-password').value;
+                    const confirm = document.getElementById('register-confirm').value;
+                    
+                    if (!name || !email || !password || !confirm) {
+                        alert('Please fill in all fields');
+                        e.preventDefault();
+                        return;
+                    }
+                    
+                    if (password !== confirm) {
+                        alert('Passwords do not match');
+                        e.preventDefault();
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

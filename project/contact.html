@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - HomeServe</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Reset & Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --secondary: #7e22ce;
+      --accent: #f97316;
+      --text: #1f2937;
+      --text-light: #6b7280;
+      --background: #f9fafb;
+      --card-bg: #ffffff;
+      --border: #e5e7eb;
+      --success: #10b981;
+      --error: #ef4444;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      line-height: 1.6;
+      background-color: var(--background);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      background: var(--card-bg);
+      padding: 15px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo i {
+      font-size: 26px;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 16px;
+      font-weight: 500;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    nav ul li a:hover {
+      color: var(--primary);
+    }
+
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary);
+      transition: width 0.3s;
+    }
+
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+
+    .login-btn {
+      background: var(--primary);
+      color: #fff;
+      padding: 10px 22px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 500;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .login-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: var(--text);
+    }
+
+    /* Page Header */
+    .page-header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      text-align: center;
+      padding: 60px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 极 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.极 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+      opacity: 0.5;
+    }
+
+    .page-header-content {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .page-header h1 {
+      font-size: 36px;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    .breadcrumb {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      gap: 10px;
+      font-size: 16px;
+    }
+
+    .breadcrumb li {
+      display: flex;
+      align-items: center;
+    }
+
+    .breadcrumb li:not(:last-child)::after {
+      content: '/';
+      margin-left: 10px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .breadcrumb a {
+      color: white;
+      text-decoration: none;
+      transition: opacity 0.3s;
+    }
+
+    .breadcrumb a:hover {
+      opacity: 0.8;
+    }
+
+    /* Contact Section */
+    .contact-section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 32px;
+      margin-bottom: 50px;
+      font-weight: 700;
+      color: var(--text);
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+
+    .contact-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .contact-method {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .contact-icon {
+      width: 60px;
+      height: 60px;
+      background: rgba(37, 99, 235, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+
+    .contact-details h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .contact-details p {
+      color: var(--text-light);
+      margin-bottom: 5px;
+    }
+
+    .contact-details a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .contact-details a:hover {
+      color: var(--primary-dark);
+      text-decoration: underline;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .social-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: var(--background);
+      border-radius: 50%;
+      color: var(--text);
+      transition: all 0.3s;
+    }
+
+    .social-links a:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    /* Contact Form */
+    .contact-form {
+      background: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+      padding: 30px;
+    }
+
+    .form-title {
+      font-size: 24px;
+      margin-bottom: 25px;
+      font-weight: 600;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 16px;
+      transition: border-color 0.3s;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    textarea.form-control {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .submit-btn {
+      background: var(--primary);
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      transition: background 0.3s, transform 0.2s;
+      width: 100%;
+    }
+
+    .submit-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .submit-btn:disabled {
+      background: var(--text-light);
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Form validation styles */
+    .form-control.error {
+      border-color: var(--error);
+    }
+
+    .form-control.success {
+      border-color: var(--success);
+    }
+
+    .error-message {
+      color: var(--error);
+      font-size: 14px;
+      margin-top: 5px;
+      display: none;
+    }
+
+    .form-group.error .error-message {
+      display: block;
+    }
+
+    .form-submission-feedback {
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 20px;
+      text-align: center;
+      display: none;
+    }
+
+    .form-submission-feedback.success {
+      background-color: rgba(16, 185, 129, 0.1);
+      color: var(--success);
+      display: block;
+    }
+
+    .form-submission-feedback.error {
+      background-color: rgba(239, 68, 68, 0.1);
+      color: var(--error);
+      display: block;
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      background: var(--card-bg);
+      padding: 80px 0;
+    }
+
+    .faq-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      margin-bottom: 20px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+
+    .faq-item:hover {
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .faq-question {
+      padding: 20px;
+      background: var(--card-bg);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+    }
+
+    .faq-answer {
+      padding: 0 20px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s, padding 0.3s;
+      background: var(--background);
+    }
+
+    .faq-item.active .faq-answer {
+      padding: 20px;
+      max-height: 500px;
+    }
+
+    .faq-item.active .faq-toggle i {
+      transform: rotate(180deg);
+    }
+
+    .faq-toggle {
+      transition: transform 0.3s;
+    }
+
+    /* Map Section */
+    .map-section {
+      padding: 80px 0;
+    }
+
+    .map-container {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+      height: 400px;
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Footer */
+    footer {
+      background: #0f172a;
+      color: #fff;
+      padding: 70px 0 30px;
+    }
+
+    .footer-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .footer-col h3 {
+      font-size: 20px;
+      margin-bottom: 25px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .footer-col h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background: var(--primary);
+    }
+
+    .footer-col p {
+      margin-bottom: 20px;
+      color: #cbd5e1;
+      line-height: 1.8;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin: 15px 0;
+    }
+
+    .footer-col ul li a {
+      text-decoration: none;
+      color: #cbd5e1;
+      transition: 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-col ul li a:hover {
+      color: white;
+      padding-left: 5px;
+    }
+
+    .footer-col .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .footer-col .social-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      color: white;
+      transition: 0.3s;
+    }
+
+    .footer-col .social-links a:hover {
+      background: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 30px;
+      margin-top: 50px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94a3b8;
+      font-size: 14px;
+    }
+
+    /* Loading spinner */
+    .spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255,255,255,.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 1s ease-in-out infinite;
+      margin-right: 10px;
+      display: none;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .contact-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header-container {
+        padding: 0 15px;
+      }
+      
+      .mobile-menu-btn {
+        display: block;
+      }
+      
+      nav {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: var(--card-bg);
+        transition: 0.3s;
+        z-index: 999;
+      }
+      
+      nav.active {
+        left: 0;
+      }
+      
+      nav ul {
+        flex-direction: column;
+        padding: 30px;
+        gap: 20px;
+      }
+      
+      .page-header h1 {
+        font-size: 32px;
+      }
+      
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+      
+      .contact-method {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+      }
+      
+      .contact-icon {
+        align-self: center;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .page-header h1 {
+        font-size: 28px;
+      }
+      
+      .section-title {
+        font-size: 26px;
+      }
+      
+      .contact-form {
+        padding: 20px;
+      }
+      
+      .footer-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <i class="fas fa-home"></i>
+        <span>HomeServe</span>
+      </div>
+      
+      <button class="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="booking.html">My Bookings</a></li>
+          <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+      </nav>
+      <a href="login.html"><button class="login-btn">Login</button></a>
+    </div>
+  </header>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="page-header-content">
+      <h1>Contact Us</h1>
+      <ul class="breadcrumb">
+        <li><a href="index.html">Home</a></li>
+        <li>Contact</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <div class="container">
+      <h2 class="section-title">Get In Touch</h2>
+      
+      <div class="contact-container">
+        <div class="contact-info">
+          <div class="contact-method">
+            <div class="contact-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="contact-details">
+              <h3>Visit Us</h3>
+              <p>123 Service Road</p>
+              <p>HomeServe Plaza, City</p>
+              <p>PIN: 123456</p>
+            </div>
+          </div>
+          
+          <div class="contact-method">
+            <div class="contact-icon">
+              <i class="fas fa-phone"></i>
+            </div>
+            <div class="contact-details">
+              <h3>Call Us</h3>
+              <p><a href="tel:+18001234567">+1 (800) 123-4567</a></p>
+              <p>Mon-Fri: 8:00 AM - 8:00 PM</p>
+              <p>Sat-Sun: 9:00 AM - 5:00 PM</p>
+            </div>
+          </div>
+          
+          <div class="contact-method">
+            <div class="contact-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="contact-details">
+              <h3>Email Us</h3>
+              <p><a href="mailto:support@homeserve.com">support@homeserve.com</a></p>
+              <p><a href="mailto:bookings@homeserve.com">bookings@homeserve.com</a></p>
+              <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="contact-form">
+          <h2 class="form-title">Send us a Message</h2>
+          <form id="contactForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="name">Your Name</label>
+                <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+                <div class="error-message">Please enter your name</div>
+              </div>
+              
+              <div class="form-group">
+                <label class="form-label" for="email">Email Address</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                <div class="error-message">Please enter a valid email address</div>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label" for="subject">Subject</label>
+              <input type="text" class="form-control" id="subject" placeholder="What is this regarding?" required>
+              <div class="error-message">Please enter a subject</div>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label" for="message">Message</label>
+              <textarea class="form-control" id="message" placeholder="How can we help you?" required></textarea>
+              <div class="error-message">Please enter your message</div>
+            </div>
+            
+            <button type="submit" class="submit-btn">
+              <span class="spinner"></span>
+              <span class="btn-text">Send Message</span>
+            </button>
+            
+            <div class="form-submission-feedback"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq-section">
+    <div class="container">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      
+      <div class="faq-container">
+        <div class="faq-item">
+          <div class="faq-question">
+            How quickly can I get a service professional? 
+            <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+          </div>
+          <div class="faq-answer">
+            In most cases, we can schedule a service professional within 24-48 hours. For emergency services, we offer same-day service in many areas.
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            What areas do you serve? 
+            <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+          </div>
+          <div class="faq-answer">
+            We currently serve over 25 major cities across the country. Enter your zip code during booking to check availability in your area.
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            Are your service professionals background checked? 
+            <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+          </div>
+          <div class="faq-answer">
+            Yes, all our service professionals undergo thorough background checks, verification, and skill assessments before joining our platform.
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            What if I need to reschedule or cancel? 
+            <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+          </div>
+          <div class="faq-answer">
+            You can reschedule or cancel your booking up to 24 hours before the scheduled service time at no charge. Cancellations within 24 hours may incur a fee.
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            What payment methods do you accept? 
+            <span class="faq-toggle"></i></span>
+          </div>
+          <div class="faq-answer">
+            We accept all major credit cards, debit cards, digital wallets (Apple Pay, Google Pay), and bank transfers.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Map Section -->
+  <section class="map-section">
+    <div class="container">
+      <h2 class="section-title">Find Us</h2>
+      <div class="map-container">
+<iframe
+  src="https://www.google.com/maps?q=Science+City+Ahmedabad&z=16&output=embed"
+  width="100%"
+  height="400"
+  style="border:0;"
+  allowfullscreen
+  loading="lazy">
+</iframe>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-col">
+        <h3>About HomeServe</h3>
+        <p>Your trusted home service partner for all needs. We connect you with verified professionals for quality service.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+          <li><a href="services.html"><i class="fas fa-chevron-right"></i> Services</a></li>
+          <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+          <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Our Services</h3>
+        <ul>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Cleaning</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Plumbing</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Painting</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Electrical</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> AC Repair</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Contact Us</h3>
+        <ul>
+          <li><a href="#"><i class="fas fa-map-marker-alt"></i> 123 Service Road, City</a></li>
+          <li><a href="tel:+919876543210"><i class="fas fa-phone"></i> +91 98765 43210</a></li>
+          <li><a href="mailto:support@homeserve.com"><i class="fas fa-envelope"></i> support@homeserve.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>&copy; 2023 HomeServe. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const nav = document.querySelector('nav');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+      nav.classList.toggle('active');
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!nav.contains(e.target) && !mobileMenuBtn.contains(e.target) && nav.classList.contains('active')) {
+        nav.classList.remove('active');
+      }
+    });
+
+    // FAQ accordion
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    faqItems.forEach(item => {
+      const question = item.querySelector('.faq-question');
+      
+      question.addEventListener('click', () => {
+        // Toggle active class on clicked item
+        item.classList.toggle('active');
+        
+        // Close other items
+        faqItems.forEach(otherItem => {
+          if (otherItem !== item && otherItem.classList.contains('active')) {
+            otherItem.classList.remove('active');
+          }
+        });
+      });
+    });
+
+    // Form validation and submission
+    const contactForm = document.getElementById('contactForm');
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const subjectInput = document.getElementById('subject');
+    const messageInput = document.getElementById('message');
+    const submitBtn = document.querySelector('.submit-btn');
+    const btnText = document.querySelector('.btn-text');
+    const spinner = document.querySelector('.spinner');
+    const feedbackEl = document.querySelector('.form-submission-feedback');
+    
+    // Validate email format
+    function isValidEmail(email) {
+      const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+    }
+    
+    // Validate individual field
+    function validateField(field) {
+      let isValid = true;
+      
+      if (field.id === 'name' && field.value.trim() === '') {
+        showError(field, 'Please enter your name');
+        isValid = false;
+      } else if (field.id === 'email') {
+        if (field.value.trim() === '') {
+          showError(field, 'Please enter your email');
+          isValid = false;
+        } else if (!isValidEmail(field.value)) {
+          showError(field, 'Please enter a valid email address');
+          isValid = false;
+        } else {
+          showSuccess(field);
+        }
+      } else if (field.id === 'subject' && field.value.trim() === '') {
+        showError(field, 'Please enter a subject');
+        isValid = false;
+      } else if (field.id === 'message' && field.value.trim() === '') {
+        showError(field, 'Please enter your message');
+        isValid = false;
+      } else {
+        showSuccess(field);
+      }
+      
+      return isValid;
+    }
+    
+    // Show error state for field
+    function showError(field, message) {
+      const formGroup = field.parentElement;
+      const errorMessage = formGroup.querySelector('.error-message');
+      
+      formGroup.classList.add('error');
+      field.classList.add('error');
+      field.classList.remove('success');
+      errorMessage.textContent = message;
+    }
+    
+    // Show success state for field
+    function showSuccess(field) {
+      const formGroup = field.parentElement;
+      
+      formGroup.classList.remove('error');
+      field.classList.remove('error');
+      field.classList.add('success');
+    }
+    
+    // Real-time validation
+    [nameInput, emailInput, subjectInput, messageInput].forEach(input => {
+      input.addEventListener('blur', () => {
+        validateField(input);
+      });
+      
+      input.addEventListener('input', () => {
+        if (input.parentElement.classList.contains('error')) {
+          validateField(input);
+        }
+      });
+    });
+    
+    // Form submission
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Validate all fields
+      const isNameValid = validateField(nameInput);
+      const isEmailValid = validateField(emailInput);
+      const isSubjectValid = validateField(subjectInput);
+      const isMessageValid = validateField(messageInput);
+      
+      if (isNameValid && isEmailValid && isSubjectValid && isMessageValid) {
+        // Show loading state
+        submitBtn.disabled = true;
+        btnText.textContent = 'Sending...';
+        spinner.style.display = 'inline-block';
+        feedbackEl.classList.remove('success', 'error');
+        feedbackEl.textContent = '';
+        
+        // Simulate form submission (replace with actual AJAX call)
+        setTimeout(() => {
+          // Hide loading state
+          submitBtn.disabled = false;
+          btnText.textContent = 'Send Message';
+          spinner.style.display = 'none';
+          
+          // Show success message
+          feedbackEl.textContent = 'Thank you for your message! We will get back to you soon.';
+          feedbackEl.classList.add('success');
+          
+          // Reset form
+          contactForm.reset();
+          
+          // Remove validation states
+          document.querySelectorAll('.form-control').forEach(input => {
+            input.classList.remove('success');
+          });
+        }, 1500);
+      }
+    });
+  </script>
+</body>
+</html> 
